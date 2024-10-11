@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 export default function CreateLearning() {
-  const [learning, setLearning] = useState('');
+  const [content, setContent] = useState('');
   const [file, setFile] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -32,13 +32,13 @@ export default function CreateLearning() {
       }
 
       await axios.post('https://11otjiv9c2.execute-api.us-east-1.amazonaws.com/dev/learnings', {
-        learning,
+        content,
         mediaUrl
       },{
         headers: { 'Content-Type': 'application/json' } 
       });
 
-      setLearning('');
+      setContent('');
       setFile(null);
     } catch (error) {
       console.error('Error creating learning:', error);
@@ -48,10 +48,10 @@ export default function CreateLearning() {
   return (
     <div className="create-learning">
       <h2>Create New Learning</h2>
-      <form onSubmit={handleSubmit}>
+      <form className=""onSubmit={handleSubmit}>
         <textarea
-          value={learning}
-          onChange={(e) => setLearning(e.target.value)}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
           placeholder="Enter your learning..."
           required
         />
@@ -59,7 +59,7 @@ export default function CreateLearning() {
           type="file"
           onChange={(e) => setFile(e.target.files[0])}
         />
-        <button type="submit">Create Learning</button>
+        <button className="submitbtn" type="submit">Create Learning</button>
       </form>
     </div>
   );
